@@ -12,10 +12,12 @@ public class EmployeeService {
 		Employee emp = new Employee();
 		emp.setName(name);
 		emp.setEmpId(empId);
+		
+		System.out.println("[EmployeeService.createEmployee] Employee created");
 		return emp;
 	}
 
 	public void deleteEmployee(String empId) {
-		
+		System.out.println("[EmployeeService.deleteEmployee] Employee deleted");
 	}
 }

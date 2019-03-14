@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.annotation.LampLog;
 import com.example.demo.model.Employee;
 import com.example.demo.service.EmployeeService;
 
@@ -16,6 +17,7 @@ public class EmployeeController {
 	private EmployeeService employeeService;
 
 	@RequestMapping(value = "/add/employee", method = RequestMethod.GET)
+    @LampLog(operation = LampLog.Operation.USER_INFO, secureType = LampLog.SecureType.PRCS, secureEventType = LampLog.SecureEventType.READ)
 	public Employee addEmployee(@RequestParam("name") String name, @RequestParam("empId") String empId) {
 		/*
 		 * localhost:8080/add/employee?empId=1&name=test
@@ -33,6 +35,17 @@ public class EmployeeController {
 		employeeService.deleteEmployee(empId);
 
 		return "Employee removed";
+	}
+
+
+	@RequestMapping(value = "/list/employee", method = RequestMethod.GET)
+    @LampLog
+	public String listEmployee() {
+		/*
+		 * localhost:8080/list/employee
+		 */
+		System.out.println("[listEmployee] ");
+		return "listEmployee";
 	}
 
 }
